@@ -1,0 +1,22 @@
+apply plugin: "com.palantir.docker"
+apply plugin: "spring-boot"
+
+docker {
+    name "docstore.rgs.ru:5000/openshift-test-backend-service:$revision"
+    dependsOn jar, bootRepackage
+}
+
+dependencies {
+    compile project(":api"),
+            project(":logging"),
+            "com.googlecode.json-simple:json-simple",
+            "com.netflix.hystrix:hystrix-javanica",
+            "info.developerblog.spring.thrift:spring-thrift-starter",
+            "org.apache.httpcomponents:httpasyncclient",
+            "org.codehaus.groovy:groovy-all",
+            "org.springframework.boot:spring-boot-starter-actuator",
+            "org.springframework.cloud:spring-cloud-starter-consul-all",
+            "org.springframework.cloud:spring-cloud-starter-feign",
+            "org.springframework:spring-beans",
+            "org.springframework:spring-web"
+}

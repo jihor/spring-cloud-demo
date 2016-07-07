@@ -1,0 +1,8 @@
+
+spring:
+    cloud:
+        consul:
+            discovery:
+                enabled: true
+                preferIpAddress: true
+                healthCheckInterval: 1s
