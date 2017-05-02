@@ -57,6 +57,7 @@ subprojects {
 
     dependencyManagement {
         imports {
+            mavenBom "io.spring.platform:platform-bom:2.0.8.RELEASE"
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR7"
         }
         dependencies {
@@ -81,14 +82,4 @@ subprojects {
             dependency 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.8'
         }
     }
-
-//    configurations.all {
-//        resolutionStrategy {
-//            eachDependency { DependencyResolveDetails details ->
-//                if (details.requested.group == 'com.netflix.feign') {
-//                    details.useVersion "8.6.0"
-//                }
-//            }
-//        }
-//    }
 }

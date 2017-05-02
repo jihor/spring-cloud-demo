@@ -1,7 +1,6 @@
 package ru.rgs.openshift.test.client
 
 import groovy.transform.CompileStatic
-import groovy.util.logging.Slf4j
 import org.springframework.cloud.netflix.feign.FeignClient
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMapping
