@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST
 class BackendServiceRestImpl implements BackendServiceRest {
     @RequestMapping(method = POST, value = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
     SampleResponse greet(@RequestBody SampleRequest request){
-        log.info("Recieved REST request: $request")
+        log.info("Received REST request: $request")
         SampleResponse response = new SampleResponse()
         response.techData.resultCode = 0
         response.techData.correlationId = request.techData.correlationId

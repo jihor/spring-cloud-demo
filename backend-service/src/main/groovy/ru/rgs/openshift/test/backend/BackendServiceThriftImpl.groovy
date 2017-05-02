@@ -24,7 +24,7 @@ class BackendServiceThriftImpl implements TBackendService.Iface {
 
     @Override
     TBackendResp greet(TBackendReq request) throws TBackendException, TException {
-        log.info("Received request for name = $request.lastname")
+        log.info("Received Thrift request for name = $request.lastname")
         new TBackendResp().setHeaders(request.headers).setMessage("My name is $appname. Your name is $request.lastname")
     }
 
