@@ -1,2 +1,2 @@
-~/idea_projects/openshift-spring-cloud-test/api $ ../thrift-compiler/thrift-0.9.3-nix.bin --gen java:private-members --out src/main/java src/main/thrift/common.thrift
-~/idea_projects/openshift-spring-cloud-test/api $ ../thrift-compiler/thrift-0.9.3-nix.bin --gen java:private-members --out src/main/java src/main/thrift/backend-interface.thrift 
+~/idea_projects/openshift-spring-cloud-test/api $ ../thrift-compiler/thrift-0.9.3-nix.bin --gen java:private-members --out src/main/groovy src/main/thrift/common.thrift
+~/idea_projects/openshift-spring-cloud-test/api $ ../thrift-compiler/thrift-0.9.3-nix.bin --gen java:private-members --out src/main/groovy src/main/thrift/backend-interface.thrift

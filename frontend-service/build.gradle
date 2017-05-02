@@ -7,17 +7,17 @@ docker {
 }
 
 dependencies {
-    compile project(":api"),
-            project(":logging"),
-            "com.googlecode.json-simple:json-simple",
-            "com.netflix.hystrix:hystrix-javanica",
-            "info.developerblog.spring.thrift:spring-thrift-starter",
-            "org.apache.httpcomponents:httpasyncclient",
-            "org.codehaus.groovy:groovy-all",
-            "org.springframework.boot:spring-boot-starter-actuator",
-            "org.springframework.cloud:spring-cloud-starter-consul-all",
-            "org.springframework.cloud:spring-cloud-starter-feign",
-            "org.springframework:spring-beans",
-            "org.springframework:spring-web",
-            "redis.clients:jedis"
+    compile "com.googlecode.json-simple:json-simple"
+    compile "com.netflix.hystrix:hystrix-javanica"
+    compile "info.developerblog.spring.thrift:spring-thrift-starter"
+    compile "org.apache.httpcomponents:httpasyncclient"
+    compile "org.codehaus.groovy:groovy-all"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.cloud:spring-cloud-starter-consul-all"
+    compile "org.springframework.cloud:spring-cloud-starter-feign"
+    compile "org.springframework:spring-beans"
+    compile "org.springframework:spring-web"
+    compile "redis.clients:jedis"
+    compile project(":api")
+    compile project(":logging")
 }

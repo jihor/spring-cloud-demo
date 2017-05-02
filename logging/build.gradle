@@ -1,9 +1,9 @@
 dependencies {
-    compile "org.projectlombok:lombok",
-            "ch.qos.logback:logback-classic",
-            "org.codehaus.groovy:groovy-all",
-            "com.fasterxml.jackson.core:jackson-annotations",
-            "com.fasterxml.jackson.core:jackson-databind",
-            "com.google.guava:guava",
-            "com.splunk.logging:splunk-library-javalogging"
+    compile "ch.qos.logback:logback-classic"
+    compile "com.fasterxml.jackson.core:jackson-annotations"
+    compile "com.fasterxml.jackson.core:jackson-databind"
+    compile "com.google.guava:guava"
+    compile "com.splunk.logging:splunk-library-javalogging"
+    compile "org.codehaus.groovy:groovy-all"
+    compile "org.projectlombok:lombok"
 }

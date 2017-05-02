@@ -1,4 +1,6 @@
 dependencies {
     compile "org.apache.thrift:libthrift"
     compile "org.projectlombok:lombok"
+    compile "org.codehaus.groovy:groovy-all"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 }

@@ -1,5 +1,3 @@
-group 'ru.rgs.openshift-spring-cloud-test'
-
 buildscript {
     repositories {
         mavenCentral()
@@ -8,7 +6,7 @@ buildscript {
 
     dependencies {
         classpath "net.rdrei.android.buildtimetracker:gradle-plugin:0.8.0",
-                "io.spring.gradle:dependency-management-plugin:0.5.7.RELEASE"
+                  "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
     }
 
     ext {
@@ -16,12 +14,17 @@ buildscript {
     }
 }
 
-apply plugin: "idea"
+plugins {
+    id "io.spring.dependency-management" version "0.6.1.RELEASE"
+//    id 'org.springframework.boot' version '1.3.5.RELEASE'
+}
+
+group 'ru.rgs.openshift-spring-cloud-test'
 
 def configForProjects = { match, config ->
     subprojects.findAll { match }
-            .collect { it.name }
-            .each { project(it, config) }
+               .collect { it.name }
+               .each { project(it, config) }
 }
 
 subprojects {
@@ -34,10 +37,9 @@ subprojects {
         }
 
         dependencies {
-            classpath "net.rdrei.android.buildtimetracker:gradle-plugin:0.8.0",
-                    "org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE",
-                    "io.spring.gradle:dependency-management-plugin:0.5.7.RELEASE",
-                    "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.8.0"
+            classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.8.0"
+            classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
+            classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE"
         }
     }
 
@@ -55,28 +57,38 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.cloud:spring-cloud-consul-dependencies:1.0.1.RELEASE"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR7"
         }
         dependencies {
             dependency "ch.qos.logback:logback-classic:1.1.7"
+            dependency "com.fasterxml.jackson.core:jackson-annotations:2.7.4"
+            dependency "com.fasterxml.jackson.core:jackson-databind:2.7.4"
             dependency "com.google.guava:guava:19.0"
+            dependency "com.googlecode.json-simple:json-simple:1.1.1"
+            dependency "com.netflix.hystrix:hystrix-javanica:1.5.3"
+            dependency "com.splunk.logging:splunk-library-javalogging:1.5.0"
+            dependency "info.developerblog.spring.thrift:spring-thrift-starter:1.3.0.RELEASE"
             dependency "org.apache.commons:commons-lang3:3.4"
+            dependency "org.apache.httpcomponents:httpasyncclient:4.1.2"
+            dependency "org.apache.thrift:libthrift:0.9.3"
             dependency "org.aspectj:aspectjweaver:1.8.9"
             dependency "org.codehaus.groovy:groovy-all:2.4.6"
             dependency "org.projectlombok:lombok:1.16.8"
             dependency "org.slf4j:jcl-over-slf4j:1.7.12"
-            dependency "com.google.guava:guava:19.0"
-            dependency "com.fasterxml.jackson.core:jackson-annotations:2.7.4"
-            dependency "com.fasterxml.jackson.core:jackson-databind:2.7.4"
-            dependency "ch.qos.logback:logback-classic:1.1.7"
             dependency "org.spockframework:spock-core:1.0-groovy-2.4"
             dependency "redis.clients:jedis:2.8.1"
-            dependency "org.apache.thrift:libthrift:0.9.3"
-            dependency "com.netflix.hystrix:hystrix-javanica:1.5.3"
-            dependency "info.developerblog.spring.thrift:spring-thrift-starter:1.0.0.RELEASE"
-            dependency "com.splunk.logging:splunk-library-javalogging:1.5.0"
-            dependency "org.apache.httpcomponents:httpasyncclient:4.1.2"
-            dependency "com.googlecode.json-simple:json-simple:1.1.1"
+            dependency 'com.netflix.feign:feign-hystrix:8.18.0'
+            dependency 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.8'
         }
     }
+
+//    configurations.all {
+//        resolutionStrategy {
+//            eachDependency { DependencyResolveDetails details ->
+//                if (details.requested.group == 'com.netflix.feign') {
+//                    details.useVersion "8.6.0"
+//                }
+//            }
+//        }
+//    }
 }
