@@ -1,5 +1,6 @@
 package ru.rgs.openshift.test.config
 
+import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import info.developerblog.spring.thrift.annotation.ThriftClientsMap
 import org.springframework.beans.factory.annotation.Value
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import redis.clients.jedis.Jedis
 import redis.clients.jedis.JedisCommands
-import ru.rgs.openshift.test.THeaders
-import ru.rgs.openshift.test.backend.TBackendReq
-import ru.rgs.openshift.test.backend.TBackendService
+import ru.rgs.cloud.poc.model.thrift.TBackendReq
+import ru.rgs.cloud.poc.model.thrift.TBackendService
+import ru.rgs.cloud.poc.model.thrift.THeaders
+
 /**
  * @author jihor (dmitriy_zhikharev@rgs.ru)
  *         (С) RGS Group, http://www.rgs.ru
@@ -20,6 +22,7 @@ import ru.rgs.openshift.test.backend.TBackendService
  */
 @RestController
 @Slf4j
+@CompileStatic
 class ServiceConfiguration {
     @Value('#{"${caching.redis.host:127.0.0.1}"}')
     private String redisHost

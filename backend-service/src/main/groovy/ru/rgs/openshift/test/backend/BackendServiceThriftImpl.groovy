@@ -2,6 +2,10 @@ package ru.rgs.openshift.test.backend
 
 import org.apache.thrift.TException
 import org.springframework.beans.factory.annotation.Value
+import ru.rgs.cloud.poc.model.thrift.TBackendException
+import ru.rgs.cloud.poc.model.thrift.TBackendReq
+import ru.rgs.cloud.poc.model.thrift.TBackendResp
+import ru.rgs.cloud.poc.model.thrift.TBackendService
 import ru.trylogic.spring.boot.thrift.annotation.ThriftController;
 
 /**
@@ -10,7 +14,7 @@ import ru.trylogic.spring.boot.thrift.annotation.ThriftController;
  * Created on 2016-07-06
  */
 @ThriftController("/backend")
-class Service implements TBackendService.Iface {
+class BackendServiceThriftImpl implements TBackendService.Iface {
     @Value('${spring.application.name:undefined}')
     String appname
 

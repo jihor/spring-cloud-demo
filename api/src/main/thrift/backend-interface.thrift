@@ -1,4 +1,4 @@
-namespace java ru.rgs.openshift.test.backend
+namespace java ru.rgs.cloud.poc.model.thrift
 include "common.thrift"
 
 struct TBackendReq {

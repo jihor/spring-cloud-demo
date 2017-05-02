@@ -1,8 +1,9 @@
 package ru.rgs.openshift.test.config
 
+import groovy.transform.CompileStatic
 import info.developerblog.spring.thrift.client.AbstractThriftClientKeyMapper
 import info.developerblog.spring.thrift.client.pool.ThriftClientKey
-import ru.rgs.openshift.test.backend.TBackendService
+import ru.rgs.cloud.poc.model.thrift.TBackendService
 
 /**
  *
@@ -11,6 +12,7 @@ import ru.rgs.openshift.test.backend.TBackendService
  * (С) RGS Group, http://www.rgs.ru
  * Created on 2016-07-07
  */
+@CompileStatic
 class DemoMapper extends AbstractThriftClientKeyMapper {
     protected HashMap<String, ThriftClientKey> mappings = ["a": ThriftClientKey.builder().
                                                                     clazz(TBackendService.Client.class).

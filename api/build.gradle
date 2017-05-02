@@ -1,3 +1,4 @@
 dependencies {
     compile "org.apache.thrift:libthrift"
+    compile "org.projectlombok:lombok"
 }
