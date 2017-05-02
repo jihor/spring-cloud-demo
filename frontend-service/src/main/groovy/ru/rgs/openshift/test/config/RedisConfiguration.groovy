@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.cache.RedisCacheManager
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.serializer.StringRedisSerializer
 
 /**
  * @author jihor (jihor@ya.ru)
@@ -37,8 +38,16 @@ class RedisConfiguration {
     }
 
     @Bean
+    StringRedisSerializer stringRedisSerializer(){
+        new StringRedisSerializer()
+    }
+
+    @Bean
+    // Watch out for incorrect Redis keys when using spring-data-redis with Jedis
+    // http://stackoverflow.com/questions/13215024/weird-redis-key-with-spring-data-jedis
     RedisTemplate redisTemplate() {
-        new RedisTemplate(connectionFactory: jedisConnectionFactory())
+        new RedisTemplate(connectionFactory: jedisConnectionFactory(), keySerializer: stringRedisSerializer(), hashKeySerializer: stringRedisSerializer())
+
     }
 
     @Bean
