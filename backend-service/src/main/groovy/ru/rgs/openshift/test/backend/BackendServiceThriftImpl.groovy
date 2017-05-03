@@ -22,9 +22,12 @@ class BackendServiceThriftImpl implements TBackendService.Iface {
     @Value('${spring.application.name:undefined}')
     String appname
 
+    @Value('${spring.application.index:default}')
+    String appindex
+
     @Override
     TBackendResp greet(TBackendReq request) throws TBackendException, TException {
-        log.info("Received Thrift request for name = $request.lastname")
+        log.info("$appname-$appindex received Thrift request for name = $request.lastname")
         new TBackendResp().setHeaders(request.headers).setMessage("My name is $appname. Your name is $request.lastname")
     }
 
