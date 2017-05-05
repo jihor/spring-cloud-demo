@@ -16,10 +16,68 @@ docker run -d --name=consul-test -p 8500:8500 -h consul docstore.rgs.ru:5000/con
 Multiple instances of the same service (e.g. 5 instances of backend-service-a) must have unique indexes (spring.application.index), because each 
 running instance must have its own instance id.
 
-docker run -d -p 8090:8080 --name backend-a -e "SPRING_APPLICATION_NAME=backend-service-a" -e "SPRING_APPLICATION_INDEX=1" -e "SPRING_CLOUD_CONSUL_HOST=172.17.0.3" -e "LOGGING_BUSINESS_INDEX_NAME=businessoperations" -e "LOGGING_DIRECTORY=logs" -e "LOGGING_ENABLE_LOG_TO_FILE=true" -e "LOGGING_ENABLE_LOG_TO_SPLUNK=true" -e "LOGGING_ENVIRONMENT=poc" -e "LOGGING_LEVEL=INFO" -e "LOGGING_NODE=someNiceNode" -e "LOGGING_SLOWQUERY_INDEX_NAME=acme-slowquery" -e "LOGGING_SPARSE=true" -e "LOGGING_SPLUNK_HOST=172.17.0.4" -e "LOGGING_SPLUNK_PORT=8088" -e "SERVER_PORT=8080" -e "LOGGING_SPLUNK_TOKEN=B2F5CEF8-4860-4362-A60F-285AFD42BCE2" -e "LOGGING_TECH_INDEX_NAME=acme" -v $PWD/logs-backend-a:/logs docstore.rgs.ru:5000/openshift-test-backend-service:latest
+docker run -d -p 8090:8080 --name backend-a \
+-e "SPRING_APPLICATION_NAME=backend-service-a" \
+-e "SPRING_APPLICATION_INDEX=1" \
+-e "SPRING_CLOUD_CONSUL_HOST=172.17.0.4" \
+-e "LOGGING_SPLUNK_HOST=172.17.0.2" \
+-e "LOGGING_SPLUNK_TOKEN=B2F5CEF8-4860-4362-A60F-285AFD42BCE2" \
+-e "LOGGING_BUSINESS_INDEX_NAME=businessoperations" \
+-e "LOGGING_DIRECTORY=logs" \
+-e "LOGGING_ENABLE_LOG_TO_FILE=true" \
+-e "LOGGING_ENABLE_LOG_TO_SPLUNK=true" \
+-e "LOGGING_ENVIRONMENT=poc" \
+-e "LOGGING_LEVEL=INFO" \
+-e "LOGGING_NODE=someNiceNode" \
+-e "LOGGING_SLOWQUERY_INDEX_NAME=acme-slowquery" \
+-e "LOGGING_SPARSE=true" \
+-e "LOGGING_SPLUNK_PORT=8088" \
+-e "SERVER_PORT=8080" \
+-e "LOGGING_TECH_INDEX_NAME=acme" \
+-v $PWD/logs-backend-a:/logs \
+docstore.rgs.ru:5000/openshift-test-backend-service:latest
 
-docker run -d -p 8095:8080 --name backend-b -e "SPRING_APPLICATION_NAME=backend-service-b" -e "SPRING_APPLICATION_INDEX=1" -e "SPRING_CLOUD_CONSUL_HOST=172.17.0.3" -e "LOGGING_BUSINESS_INDEX_NAME=businessoperations" -e "LOGGING_DIRECTORY=logs" -e "LOGGING_ENABLE_LOG_TO_FILE=true" -e "LOGGING_ENABLE_LOG_TO_SPLUNK=true" -e "LOGGING_ENVIRONMENT=poc" -e "LOGGING_LEVEL=INFO" -e "LOGGING_NODE=someNiceNode" -e "LOGGING_SLOWQUERY_INDEX_NAME=acme-slowquery" -e "LOGGING_SPARSE=true" -e "LOGGING_SPLUNK_HOST=172.17.0.4" -e "LOGGING_SPLUNK_PORT=8088" -e "SERVER_PORT=8080" -e "LOGGING_SPLUNK_TOKEN=B2F5CEF8-4860-4362-A60F-285AFD42BCE2" -e "LOGGING_TECH_INDEX_NAME=acme" -v $PWD/logs-backend-b:/logs docstore.rgs.ru:5000/openshift-test-backend-service:latest
+docker run -d -p 8095:8080 --name backend-b \
+-e "SPRING_APPLICATION_NAME=backend-service-b" \
+-e "SPRING_APPLICATION_INDEX=1" \
+-e "SPRING_CLOUD_CONSUL_HOST=172.17.0.4" \
+-e "LOGGING_SPLUNK_HOST=172.17.0.2" \
+-e "LOGGING_SPLUNK_TOKEN=B2F5CEF8-4860-4362-A60F-285AFD42BCE2" \
+-e "LOGGING_BUSINESS_INDEX_NAME=businessoperations" \
+-e "LOGGING_DIRECTORY=logs" \
+-e "LOGGING_ENABLE_LOG_TO_FILE=true" \
+-e "LOGGING_ENABLE_LOG_TO_SPLUNK=true" \
+-e "LOGGING_ENVIRONMENT=poc" \
+-e "LOGGING_LEVEL=INFO" \
+-e "LOGGING_NODE=someNiceNode" \
+-e "LOGGING_SLOWQUERY_INDEX_NAME=acme-slowquery" \
+-e "LOGGING_SPARSE=true" \
+-e "LOGGING_SPLUNK_PORT=8088" \
+-e "SERVER_PORT=8080" \
+-e "LOGGING_TECH_INDEX_NAME=acme" \
+-v $PWD/logs-backend-b:/logs \
+docstore.rgs.ru:5000/openshift-test-backend-service:latest
 
 #### 6. Run frontend (ip addresses can to be obtained using 'docker inspect' command):
 
-docker run -d -p 8080:8080 --name frontend -e "SPRING_APPLICATION_NAME=frontend-service" -e "SPRING_CLOUD_CONSUL_HOST=172.17.0.3" -e "REDIS_HOST=172.17.0.2" -e "REDIS_PORT=6379" -e "LOGGING_BUSINESS_INDEX_NAME=businessoperations" -e "LOGGING_DIRECTORY=logs" -e "LOGGING_ENABLE_LOG_TO_FILE=true" -e "LOGGING_ENABLE_LOG_TO_SPLUNK=true" -e "LOGGING_ENVIRONMENT=poc" -e "LOGGING_LEVEL=INFO" -e "LOGGING_NODE=someNiceNode" -e "LOGGING_SLOWQUERY_INDEX_NAME=acme-slowquery" -e "LOGGING_SPARSE=true" -e "LOGGING_SPLUNK_HOST=172.17.0.4" -e "LOGGING_SPLUNK_PORT=8088" -e "LOGGING_SPLUNK_TOKEN=B2F5CEF8-4860-4362-A60F-285AFD42BCE2" -e "LOGGING_TECH_INDEX_NAME=acme" -e "RIBBON_HTTP_CLIENT_ENABLED=true" -v $PWD/logs-frontend:/logs docstore.rgs.ru:5000/openshift-test-frontend-service:latest
+docker run -d -p 8080:8080 --name frontend \
+-e "SPRING_APPLICATION_NAME=frontend-service" \
+-e "SPRING_CLOUD_CONSUL_HOST=172.17.0.4" \
+-e "LOGGING_SPLUNK_HOST=172.17.0.2" \
+-e "REDIS_HOST=172.17.0.3" \
+-e "LOGGING_SPLUNK_TOKEN=B2F5CEF8-4860-4362-A60F-285AFD42BCE2" \
+-e "REDIS_PORT=6379" \
+-e "LOGGING_BUSINESS_INDEX_NAME=businessoperations" \
+-e "LOGGING_DIRECTORY=logs" \
+-e "LOGGING_ENABLE_LOG_TO_FILE=true" \
+-e "LOGGING_ENABLE_LOG_TO_SPLUNK=true" \
+-e "LOGGING_ENVIRONMENT=poc" \
+-e "LOGGING_LEVEL=INFO" \
+-e "LOGGING_NODE=someNiceNode" \
+-e "LOGGING_SLOWQUERY_INDEX_NAME=acme-slowquery" \
+-e "LOGGING_SPARSE=true" \
+-e "LOGGING_SPLUNK_PORT=8088" \
+-e "LOGGING_TECH_INDEX_NAME=acme" \
+-e "RIBBON_HTTP_CLIENT_ENABLED=true" \
+-v $PWD/logs-frontend:/logs \
+docstore.rgs.ru:5000/openshift-test-frontend-service:latest
