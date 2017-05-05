@@ -14,6 +14,7 @@ import ru.rgs.cloud.poc.model.pogo.SampleRequest
 import ru.rgs.cloud.poc.model.thrift.TBackendReq
 import ru.rgs.cloud.poc.model.thrift.THeaders
 import ru.rgs.openshift.test.client.RestClientWithFeign
+import ru.rgs.openshift.test.config.Constants
 import ru.rgs.openshift.test.config.RedisConfiguration
 import ru.rgs.openshift.test.config.ThriftClientConfiguration
 import ru.rgs.openshift.test.config.ThriftClientConfiguration.ThriftClientWrapper
@@ -35,7 +36,7 @@ class RestService {
     ThriftClientWrapper thriftClientWrapper
 
     @RequestMapping(value = "/hello/{name}/thrift", method = RequestMethod.GET)
-    @Cacheable(cacheNames = "demoCache", key = "'thrift-'.concat(#name)", cacheManager = "redisCacheManager")
+    @Cacheable(cacheNames =  Constants.DEMO_CACHE, key = "'thrift-'.concat(#name)", cacheManager = "redisCacheManager")
     String helloThrift(@PathVariable String name) {
         String backendAorB = name.length() % 2 == 0 ? "a" : "b"
         log.info "Using backend $backendAorB for name $name..."
@@ -55,7 +56,7 @@ class RestService {
     RestClientWithFeign restClientWithFeign
 
     @RequestMapping(value = "/hello/{name}/rest-r", method = RequestMethod.GET)
-    @Cacheable(cacheNames = "demoCache", key = "'rest-'.concat(#name)", cacheManager = "redisCacheManager")
+    @Cacheable(cacheNames =  Constants.DEMO_CACHE, key = "'rest-'.concat(#name)", cacheManager = "redisCacheManager")
     String helloRestRedis(@PathVariable String name) {
         def request = new SampleRequest()
         request.techData.correlationId = UUID.randomUUID()
@@ -66,7 +67,7 @@ class RestService {
     }
 
     @RequestMapping(value = "/hello/{name}/rest-c", method = RequestMethod.GET)
-    @Cacheable(cacheNames = "demoCache", key = "'rest-'.concat(#name)", cacheManager = "couchbaseCacheManager")
+    @Cacheable(cacheNames =  Constants.DEMO_CACHE, key = "'rest-'.concat(#name)", cacheManager = "couchbaseCacheManager")
     String helloRestCouchbase(@PathVariable String name) {
         def request = new SampleRequest()
         request.techData.correlationId = UUID.randomUUID()

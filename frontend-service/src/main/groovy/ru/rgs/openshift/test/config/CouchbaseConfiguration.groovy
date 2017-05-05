@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Configuration
  *         <p>
  *         Couchbase cache configuration.
  *         See: https://spring.io/blog/2016/04/14/couchbase-as-a-first-class-citizen-of-spring-boot-1-4
- *         to
  *         and  https://github.com/couchbaselabs/couchbase-spring-cache
+ *         Guide: https://github.com/couchbase-guides/couchbase-docker
  */
 @Configuration
 @CompileStatic
@@ -37,6 +37,6 @@ class CouchbaseConfiguration {
     @Bean
     @Qualifier("couchbaseCacheManager")
     AbstractCacheManager couchbaseCacheManager() {
-        new CouchbaseCacheManager(CacheBuilder.newInstance(bucket()), "demoCache")
+        new CouchbaseCacheManager(CacheBuilder.newInstance(bucket()), Constants.DEMO_CACHE)
     }
 }
