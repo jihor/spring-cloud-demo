@@ -51,6 +51,7 @@ subprojects {
         }
         dependencies {
             dependency "ch.qos.logback:logback-classic:1.2.3"
+            dependency "com.couchbase.client:couchbase-spring-cache:2.1.0"
             dependency "com.fasterxml.jackson.core:jackson-annotations:2.8.8"
             dependency "com.fasterxml.jackson.core:jackson-databind:2.8.8"
             dependency "com.google.guava:guava:21.0"

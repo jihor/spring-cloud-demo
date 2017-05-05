@@ -15,6 +15,8 @@ dependencies {
     compile "org.codehaus.groovy:groovy-all"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-data-redis"
+    compile "org.springframework.boot:spring-boot-starter-data-couchbase"
+    compile "com.couchbase.client:couchbase-spring-cache"
     compile "org.springframework.cloud:spring-cloud-starter-consul-all"
     compile "org.springframework.cloud:spring-cloud-starter-feign"
     compile "org.springframework:spring-beans"

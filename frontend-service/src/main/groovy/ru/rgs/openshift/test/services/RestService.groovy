@@ -1,4 +1,4 @@
-package ru.rgs.openshift.test.config
+package ru.rgs.openshift.test.services
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
@@ -14,6 +14,8 @@ import ru.rgs.cloud.poc.model.pogo.SampleRequest
 import ru.rgs.cloud.poc.model.thrift.TBackendReq
 import ru.rgs.cloud.poc.model.thrift.THeaders
 import ru.rgs.openshift.test.client.RestClientWithFeign
+import ru.rgs.openshift.test.config.RedisConfiguration
+import ru.rgs.openshift.test.config.ThriftClientConfiguration
 import ru.rgs.openshift.test.config.ThriftClientConfiguration.ThriftClientWrapper
 
 import java.time.LocalDate
@@ -26,15 +28,14 @@ import java.time.LocalDate
 @RestController
 @Slf4j
 @CompileStatic
-@Import([RedisConfiguration, ThriftClientConfiguration])
 @EnableCaching
-class ServiceConfiguration {
+class RestService {
     // can't inject ThriftClientsMap here directly, because once @Cacheable is used, whole class is proxied
     @Autowired
     ThriftClientWrapper thriftClientWrapper
 
     @RequestMapping(value = "/hello/{name}/thrift", method = RequestMethod.GET)
-    @Cacheable(cacheNames = "demoCache", key = "'thrift-'.concat(#name)")
+    @Cacheable(cacheNames = "demoCache", key = "'thrift-'.concat(#name)", cacheManager = "redisCacheManager")
     String helloThrift(@PathVariable String name) {
         String backendAorB = name.length() % 2 == 0 ? "a" : "b"
         log.info "Using backend $backendAorB for name $name..."
@@ -53,9 +54,20 @@ class ServiceConfiguration {
     @Autowired
     RestClientWithFeign restClientWithFeign
 
-    @RequestMapping(value = "/hello/{name}/rest", method = RequestMethod.GET)
-    @Cacheable(cacheNames = "demoCache", key = "'rest-'.concat(#name)")
-    String helloRest(@PathVariable String name) {
+    @RequestMapping(value = "/hello/{name}/rest-r", method = RequestMethod.GET)
+    @Cacheable(cacheNames = "demoCache", key = "'rest-'.concat(#name)", cacheManager = "redisCacheManager")
+    String helloRestRedis(@PathVariable String name) {
+        def request = new SampleRequest()
+        request.techData.correlationId = UUID.randomUUID()
+        request.businessData.name = name
+        request.businessData.dateOfBirth = LocalDate.now()
+        log.info("Sending REST request: $request")
+        restClientWithFeign.greet(request).businessData.message
+    }
+
+    @RequestMapping(value = "/hello/{name}/rest-c", method = RequestMethod.GET)
+    @Cacheable(cacheNames = "demoCache", key = "'rest-'.concat(#name)", cacheManager = "couchbaseCacheManager")
+    String helloRestCouchbase(@PathVariable String name) {
         def request = new SampleRequest()
         request.techData.correlationId = UUID.randomUUID()
         request.businessData.name = name
