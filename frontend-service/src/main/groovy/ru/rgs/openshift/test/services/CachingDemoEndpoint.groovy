@@ -5,7 +5,6 @@ import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.cache.annotation.EnableCaching
-import org.springframework.context.annotation.Import
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -15,11 +14,11 @@ import ru.rgs.cloud.poc.model.thrift.TBackendReq
 import ru.rgs.cloud.poc.model.thrift.THeaders
 import ru.rgs.openshift.test.client.RestClientWithFeign
 import ru.rgs.openshift.test.config.Constants
-import ru.rgs.openshift.test.config.RedisConfiguration
-import ru.rgs.openshift.test.config.ThriftClientConfiguration
 import ru.rgs.openshift.test.config.ThriftClientConfiguration.ThriftClientWrapper
 
 import java.time.LocalDate
+import java.util.concurrent.CompletableFuture
+import java.util.function.Supplier
 
 /**
  * @author jihor (dmitriy_zhikharev@rgs.ru)
@@ -30,13 +29,13 @@ import java.time.LocalDate
 @Slf4j
 @CompileStatic
 @EnableCaching
-class RestService {
+class CachingDemoEndpoint {
     // can't inject ThriftClientsMap here directly, because once @Cacheable is used, whole class is proxied
     @Autowired
     ThriftClientWrapper thriftClientWrapper
 
     @RequestMapping(value = "/hello/{name}/thrift", method = RequestMethod.GET)
-    @Cacheable(cacheNames =  Constants.DEMO_CACHE, key = "'thrift-'.concat(#name)", cacheManager = "redisCacheManager")
+    @Cacheable(cacheNames = Constants.DEMO_CACHE, key = "'thrift-'.concat(#name)", cacheManager = "redisCacheManager")
     String helloThrift(@PathVariable String name) {
         String backendAorB = name.length() % 2 == 0 ? "a" : "b"
         log.info "Using backend $backendAorB for name $name..."
@@ -56,7 +55,7 @@ class RestService {
     RestClientWithFeign restClientWithFeign
 
     @RequestMapping(value = "/hello/{name}/rest-r", method = RequestMethod.GET)
-    @Cacheable(cacheNames =  Constants.DEMO_CACHE, key = "'rest-'.concat(#name)", cacheManager = "redisCacheManager")
+    @Cacheable(cacheNames = Constants.DEMO_CACHE, key = "'rest-'.concat(#name)", cacheManager = "redisCacheManager")
     String helloRestRedis(@PathVariable String name) {
         def request = new SampleRequest()
         request.techData.correlationId = UUID.randomUUID()
@@ -67,7 +66,7 @@ class RestService {
     }
 
     @RequestMapping(value = "/hello/{name}/rest-c", method = RequestMethod.GET)
-    @Cacheable(cacheNames =  Constants.DEMO_CACHE, key = "'rest-'.concat(#name)", cacheManager = "couchbaseCacheManager")
+    @Cacheable(cacheNames = Constants.DEMO_CACHE, key = "'rest-'.concat(#name)", cacheManager = "couchbaseCacheManager")
     String helloRestCouchbase(@PathVariable String name) {
         def request = new SampleRequest()
         request.techData.correlationId = UUID.randomUUID()
@@ -76,5 +75,4 @@ class RestService {
         log.info("Sending REST request: $request")
         restClientWithFeign.greet(request).businessData.message
     }
-
 }

@@ -14,4 +14,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST
 interface BackendServiceRest {
     @RequestMapping(method = POST, value = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
     SampleResponse greet(SampleRequest request)
+
+    @RequestMapping(method = POST, value = "/do-a-task", produces = MediaType.APPLICATION_JSON_VALUE)
+    Integer doATask()
 }

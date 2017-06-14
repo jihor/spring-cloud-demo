@@ -12,6 +12,7 @@ import ru.rgs.cloud.poc.model.pogo.SampleRequest
 import ru.rgs.cloud.poc.model.pogo.SampleResponse
 
 import java.time.LocalDate
+import java.util.concurrent.TimeUnit
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST
 
@@ -37,5 +38,15 @@ class BackendServiceRestImpl implements BackendServiceRest {
         response.techData.correlationId = request.techData.correlationId
         response.businessData.message = "Hello ${request.businessData.name}${request.businessData.dateOfBirth == LocalDate.now() ? '. Happy birthday!' : ''}"
         response
+    }
+
+    Random r = new Random()
+
+    @Override
+    Integer doATask() {
+        def timeout = r.nextInt(4000)
+        TimeUnit.MILLISECONDS.sleep(timeout)
+        log.info("Waited $timeout msec")
+        return timeout
     }
 }
