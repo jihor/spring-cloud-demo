@@ -2,6 +2,7 @@ package ru.rgs.cloud.poc.model.pogo
 
 import groovy.transform.CompileStatic
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST
@@ -17,4 +18,7 @@ interface BackendServiceRest {
 
     @RequestMapping(method = POST, value = "/do-a-task", produces = MediaType.APPLICATION_JSON_VALUE)
     Integer doATask()
+
+    @RequestMapping(method = POST, value = "/do-business", produces = MediaType.TEXT_PLAIN_VALUE)
+    ResponseEntity<String> doBusiness(String s)
 }

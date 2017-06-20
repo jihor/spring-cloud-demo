@@ -10,6 +10,7 @@ docker {
 dependencies {
     compile "com.googlecode.json-simple:json-simple"
     compile "com.netflix.hystrix:hystrix-javanica"
+    compile "commons-io:commons-io:2.5"
     compile "info.developerblog.spring.thrift:spring-thrift-starter"
     compile "io.reactivex.rxjava2:rxjava"
     compile "org.apache.httpcomponents:httpasyncclient"

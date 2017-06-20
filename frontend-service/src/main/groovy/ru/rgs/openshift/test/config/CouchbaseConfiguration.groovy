@@ -30,13 +30,13 @@ class CouchbaseConfiguration {
     }
 
     @Bean
-    Bucket bucket() {
+    Bucket bucket(Cluster cluster) {
         return cluster.openBucket("default", "")
     }
 
     @Bean
     @Qualifier("couchbaseCacheManager")
-    AbstractCacheManager couchbaseCacheManager() {
-        new CouchbaseCacheManager(CacheBuilder.newInstance(bucket()), Constants.DEMO_CACHE)
+    AbstractCacheManager couchbaseCacheManager(Bucket bucket) {
+        new CouchbaseCacheManager(CacheBuilder.newInstance(bucket), Constants.DEMO_CACHE)
     }
 }

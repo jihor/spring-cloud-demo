@@ -60,6 +60,7 @@ subprojects {
             dependency "com.splunk.logging:splunk-library-javalogging:1.5.0"
             dependency "info.developerblog.spring.thrift:spring-thrift-starter:1.4.0.RELEASE"
             dependency "org.apache.commons:commons-lang3:3.5"
+            dependency "commons-io:commons-io:2.5"
             dependency "org.apache.httpcomponents:httpasyncclient:4.1.3"
             dependency "org.apache.thrift:libthrift:0.10.0"
             dependency "org.aspectj:aspectjweaver:1.8.10"
