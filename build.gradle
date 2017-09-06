@@ -17,10 +17,10 @@ buildscript {
     }
 }
 
-group 'ru.rgs.openshift-spring-cloud-test'
+group 'ru.rgs.spring-cloud-demo'
 
 subprojects {
-    group 'ru.rgs.spring-cloud-test'
+    group 'ru.rgs.spring-cloud-demo'
 
     def springBomVersion = 'Brussels-SR2'
     def springCloudVersion = 'Dalston.RELEASE'

@@ -40,7 +40,7 @@ docker run -d -p 8090:8080 --name backend-a \
 -e "SERVER_PORT=8080" \
 -e "LOGGING_TECH_INDEX_NAME=acme" \
 -v $PWD/logs-backend-a:/logs \
-docstore.rgs.ru:5000/openshift-test-backend-service:latest
+docstore.rgs.ru:5000/spring-cloud-demo-backend-service:latest
 
 docker run -d -p 8095:8080 --name backend-b \
 -e "SPRING_APPLICATION_NAME=backend-service-b" \
@@ -61,7 +61,7 @@ docker run -d -p 8095:8080 --name backend-b \
 -e "SERVER_PORT=8080" \
 -e "LOGGING_TECH_INDEX_NAME=acme" \
 -v $PWD/logs-backend-b:/logs \
-docstore.rgs.ru:5000/openshift-test-backend-service:latest
+docstore.rgs.ru:5000/spring-cloud-demo-backend-service:latest
 
 #### 6. Run frontend (ip addresses can to be obtained using 'docker inspect' command):
 
@@ -89,4 +89,4 @@ docker run -d -p 8080:8080 --name frontend \
 -e "LOGGING_TECH_INDEX_NAME=acme" \
 -e "RIBBON_HTTP_CLIENT_ENABLED=true" \
 -v $PWD/logs-frontend:/logs \
-docstore.rgs.ru:5000/openshift-test-frontend-service:latest
+docstore.rgs.ru:5000/spring-cloud-demo-frontend-service:latest

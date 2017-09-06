@@ -2,7 +2,7 @@ apply plugin: "com.palantir.docker"
 apply plugin: "org.springframework.boot"
 
 docker {
-    name "docstore.rgs.ru:5000/openshift-test-frontend-service:$revision"
+    name "docstore.rgs.ru:5000/spring-cloud-demo-frontend-service:$revision"
     files "build/libs/frontend-service.jar"
     dependsOn jar, bootRepackage
 }

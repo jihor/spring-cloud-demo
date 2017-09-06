@@ -1,2 +1,2 @@
-rootProject.name = "openshift-spring-cloud-test"
+rootProject.name = "spring-cloud-demo"
 include "api", "logging", "frontend-service", "backend-service"
